@@ -1,4 +1,4 @@
-import 'package:brew_crew_project/screens/authenticate/authenticate.dart';
+import 'package:brew_crew_project/screens/authenticate/Authenticate.dart';
 import 'package:brew_crew_project/screens/home/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
