@@ -1,7 +1,7 @@
-import 'package:brew_crew_project/screens/authenticate/authenticate.dart';
 import 'package:brew_crew_project/services/AuthService.dart';
 import 'package:brew_crew_project/shared/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:brew_crew_project/shared/loading.dart';
 
 class Register extends StatefulWidget {
   Function toggleView;
@@ -17,9 +17,10 @@ class _RegisterState extends State<Register> {
   String email = "";
   String password = "";
   String error = '';
+  bool loading = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading == true ? Loading() : Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
@@ -75,10 +76,16 @@ class _RegisterState extends State<Register> {
                   ),
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
+                      setState(() {
+                        loading = true;
+                      });
                       dynamic result = await _auth.registerWithEmailAndPassword(
                           email, password);
                       if (result == null) {
-                        setState(() => error = 'Please supply a valid email');
+                        setState(() {
+                          error = "Please supply a valid email";
+                          loading = false;
+                        });
                       }
                       print(error);
                     }

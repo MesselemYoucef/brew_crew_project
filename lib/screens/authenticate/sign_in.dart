@@ -1,6 +1,7 @@
 import 'package:brew_crew_project/services/AuthService.dart';
 import 'package:brew_crew_project/shared/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:brew_crew_project/shared/loading.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -13,6 +14,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   //textfield state
   String email = "";
@@ -20,7 +22,8 @@ class _SignInState extends State<SignIn> {
   String error = "";
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+
+          return loading == true ? Loading() : Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
@@ -76,11 +79,15 @@ class _SignInState extends State<SignIn> {
                   ),
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
+                      setState(() {
+                        loading = true;
+                      });
                       dynamic result = await _auth.signInWithEmailAndPassword(
                           email, password);
                       if (result == null) {
                         setState(() {
                           error = "Please supply a valid email or password";
+                          loading = false;
                         });
                       }
                     }
