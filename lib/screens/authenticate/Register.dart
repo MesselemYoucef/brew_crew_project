@@ -1,4 +1,5 @@
 import 'package:brew_crew_project/services/AuthService.dart';
+import 'package:brew_crew_project/services/DatabaseService.dart';
 import 'package:brew_crew_project/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:brew_crew_project/shared/loading.dart';
@@ -85,9 +86,9 @@ class _RegisterState extends State<Register> {
                         setState(() {
                           error = "Please supply a valid email";
                           loading = false;
+                          print(error);
                         });
                       }
-                      print(error);
                     }
                   },
                 ),
