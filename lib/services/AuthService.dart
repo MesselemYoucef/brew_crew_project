@@ -1,11 +1,10 @@
 import 'package:brew_crew_project/models/UserModel.dart';
 import 'package:brew_crew_project/services/DatabaseService.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:brew_crew_project/services/AuthService.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
+ 
   //Create a User Object based on the Firebase user
   UserModel _userFromFirebaseUser(User user) {
     return user != null ? UserModel(uid: user.uid) : null;

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+import 'package:brew_crew_project/models/Brew.dart';
 
 
 class DatabaseService{
@@ -17,9 +17,22 @@ class DatabaseService{
     });
   }
 
-  //get brews stream
-  Stream<QuerySnapshot> get brews {
-    return brewCollection.snapshots();
+  //brew list from the snapshot
+  List<Brew> _brewListFromSnapshot(QuerySnapshot snapshot){
+    print("++++++++++++++++++++++++");
+    
+    return  snapshot.docs.map((doc){
+      Brew(
+        name: doc.data()['name'] ?? '',
+        sugars: doc.data()['sugars'] ?? '0',
+        strength: doc.data()['strength'] ?? 0
+      );
+    }).toList();
+  }
+
+  //get brews Stream
+  Stream <List<Brew>> get brews {
+    return brewCollection.snapshots().map(_brewListFromSnapshot);
   }
 
 }
