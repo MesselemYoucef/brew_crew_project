@@ -11,12 +11,13 @@ class _BrewListState extends State<BrewList> {
   @override
   Widget build(BuildContext context) {
     final brews = Provider.of<List<Brew>>(context);
-     
+     if(brews != null && brews is List<Brew>){
       brews.forEach((brew) {
         print(brew.name);
         print(brew.strength);
         print(brew.sugars);
       });
+     }
 
     return Container(
       
