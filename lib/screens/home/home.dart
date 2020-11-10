@@ -5,11 +5,23 @@ import 'package:brew_crew_project/services/DatabaseService.dart';
 import 'package:provider/provider.dart';
 import 'BrewList.dart';
 import 'package:brew_crew_project/models/Brew.dart';
+import 'SettingsForm.dart';
 
 class Home extends StatelessWidget {
     final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
+    void _showSettingsPanel(){
+      showModalBottomSheet(
+        context: context, 
+        builder: (context){
+          return Container(
+            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+            child: SettingsForm(),
+          );
+        }
+        );
+    }
     return StreamProvider<List<Brew>>.value(
       value: DatabaseService().brews,
           child: Scaffold(
@@ -33,6 +45,20 @@ class Home extends StatelessWidget {
                   color: Colors.white
                 ),
                 ),
+              ),
+              FlatButton.icon(
+                onPressed: () => _showSettingsPanel(), 
+                icon: Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                ), 
+                label: Text(
+                              "Settings",
+                              style: TextStyle(
+                                color: Colors.white
+                              ),
+                            ),
+
               )
           ],
         ),
