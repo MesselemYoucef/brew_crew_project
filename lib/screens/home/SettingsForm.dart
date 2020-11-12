@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:brew_crew_project/shared/constants.dart';
 
@@ -45,7 +47,18 @@ class _SettingsFormState extends State<SettingsForm> {
               setState(() => _currentSugars = value);
             },
           ),
+          SizedBox(height: 20.0),
           //slider
+          Slider(
+            min: 100,
+            max: 900,
+            divisions: 8,
+            activeColor: Colors.brown[_currentStrength ?? 100],
+            inactiveColor: Colors.brown[_currentStrength ?? 100],
+            value: (_currentStrength ?? 100).toDouble(), 
+            onChanged: (val)=> setState(() => _currentStrength = val.round()),
+            ),
+            Text("$_currentStrength"),
           //button
           RaisedButton(
             color: Colors.pink[400],
