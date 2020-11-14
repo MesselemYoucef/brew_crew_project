@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:brew_crew_project/models/Brew.dart';
 
 
+
 class BrewTile extends StatelessWidget {
 
   final Brew brew;
@@ -17,6 +18,7 @@ class BrewTile extends StatelessWidget {
           dense: false,
           onTap: (){},
           leading: CircleAvatar(
+            backgroundImage: AssetImage("assets/coffee_icon.png"),
             backgroundColor: Colors.brown[brew.strength]
           ),
           title: Text(brew.name),
